@@ -1,0 +1,55 @@
+{
+  "name": "acler",
+  "version": "1.0.0",
+  "author": "Evgeny Razumov (enniel)",
+  "license": "MIT",
+  "main": "dist/acler.cjs.js",
+  "module": "dist/acler.esm.js",
+  "browser": "dist/acler.umd.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "child_process": "^1.0.2",
+    "coveralls": "^3.0.0",
+    "husky": "^0.14.3",
+    "japa": "^1.0.6",
+    "japa-cli": "^1.0.1",
+    "lint-staged": "^6.1.0",
+    "nyc": "^11.4.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "semver": "^5.5.0",
+    "standard": "^10.0.3"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run cleanup && npm run lint && npm run build",
+    "posttest": "npm run coverage",
+    "cleanup": "rm -rf dist",
+    "test:local": "node ./bin/index.js --local",
+    "test:win": "node ./bin/index.js --win",
+    "test": "nyc npm run test:local",
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "precommit": "npm run test && lint-staged",
+    "prepush": "npm run test && lint-staged",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "nyc": {
+    "include": [
+      "src"
+    ]
+  },
+  "files": [
+    "dist"
+  ]
+}
