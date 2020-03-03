@@ -67,11 +67,11 @@ const convertToRPN = (exp) => {
   exp = addSpaces(exp)
   const stack = []
   const rpn = []
-  for (let token of exp.trim().split(' ')) {
+  for (const token of exp.trim().split(' ')) {
     if (operators[token]) {
       // This assumes no right-associative operators
       while (
-          stack[stack.length - 1] &&
+        stack[stack.length - 1] &&
           operators[stack[stack.length - 1]] &&
           operators[token].precedence <= operators[stack[stack.length - 1]].precedence) {
         rpn.push(stack.pop())
@@ -107,7 +107,7 @@ const toBool = (token, checker) => {
 const check = (expression, checker) => {
   const rpn = convertToRPN(expression)
   const stack = []
-  for (let token of rpn) {
+  for (const token of rpn) {
     const operator = operators[token]
     if (operator) {
       const numArgs = operator.n || 2

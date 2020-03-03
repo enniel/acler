@@ -22,7 +22,7 @@ module.exports = [
     plugins: [
       commonjs(),
       babel({
-        plugins: ['external-helpers']
+        plugins: ['@babel/external-helpers']
       })
     ]
   },
@@ -37,7 +37,7 @@ module.exports = [
     plugins: [
       commonjs(),
       babel({
-        plugins: ['external-helpers']
+        plugins: ['@babel/external-helpers']
       })
     ]
   },
@@ -51,7 +51,7 @@ module.exports = [
     },
     plugins: [
       babel({
-        plugins: ['external-helpers']
+        plugins: ['@babel/external-helpers']
       })
     ]
   }
