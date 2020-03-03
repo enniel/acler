@@ -88,7 +88,7 @@ const convertToRPN = (exp) => {
       } else {
         throw new InvalidExpression()
       }
-    } else if (/^[a-zA-Z_-]+$/.test(token)) {
+    } else if (/^[a-zA-Z_.-]+$/.test(token)) {
       rpn.push(token)
     } else {
       throw new InvalidExpression()
