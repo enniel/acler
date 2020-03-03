@@ -85,6 +85,18 @@ test.group('Acl', function () {
     }))
   })
 
+  test('complex expression with complete string of scope (dot) - (but without validating if start with scope only (.*))', async assert => {
+    assert.isTrue(await Acl.check('(posts.editor && moderator.comments) && !customer', operand => {
+      return ['posts.editor', 'moderator.comments'].includes(operand)
+    }))
+    assert.isFalse(await Acl.check('(posts.editor && moderator.comments)', operand => {
+      return ['posts.editor', 'moderator', 'customer'].includes(operand)
+    }))
+    assert.isFalse(await Acl.check('(posts.editor && moderator.comments) && !customer', operand => {
+      return ['posts.editor', 'moderator.comments', 'customer'].includes(operand)
+    }))
+  })
+
   test('should throw InvalidExpression', async assert => {
     try {
       await Acl.check('admin &&& moderator')
